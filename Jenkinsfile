@@ -1,4 +1,4 @@
-def baseArtifactName = 'TestMacApp'
+def baseArtifactNames = ['TestMacApp': 'TestMacApp']
 def xcodeSchemes = ['TestMacApp']
 def repoURL = 'https://github.com/emlynmu/testmacapp.git'
 def defaultCheckout = 'master'
@@ -24,7 +24,7 @@ properties([
 withEnv(["DEVELOPER_DIR=${xcodePath}/Contents/Developer"]) {
     node('xcode-9.1') {
         def workspace = pwd()
-        def versionedArtifact =  "${baseArtifactName}-${BUILD_NUMBER}"
+        def versionedArtifact =  "${baseArtifactNames.get(XCODE_SCHEME)}-${BUILD_NUMBER}"
 
         stage('Checkout') {
             deleteDir() // Start with a clean workspace
